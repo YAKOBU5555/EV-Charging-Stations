@@ -1,0 +1,119 @@
+/* EV Charging Station Health Monitoring System — dashboard theme */
+:root {
+  --ev-blue: #0b63f6;
+  --ev-blue-dark: #0846b3;
+  --ev-navy: #10192b;
+  --ev-navy-soft: #1b2740;
+  --ev-green: #17a673;
+  --ev-amber: #f0a020;
+  --ev-red: #e0443e;
+  --ev-grey: #6b7686;
+  --ev-bg: #f2f4f8;
+  --ev-border: #e2e6ee;
+  --sidebar-width: 248px;
+}
+
+body {
+  background: var(--ev-bg);
+  color: #1d2532;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+}
+
+a { color: var(--ev-blue); text-decoration: none; }
+a:hover { color: var(--ev-blue-dark); }
+
+/* ---------- Layout ---------- */
+.app-sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width);
+  background: var(--ev-navy); color: #c7d1e2; padding: 0 0 24px;
+  overflow-y: auto; z-index: 1040; transition: transform .2s ease;
+}
+.app-sidebar .brand {
+  display: flex; align-items: center; gap: 10px;
+  padding: 20px 18px; color: #fff; font-weight: 600; line-height: 1.2;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.app-sidebar .brand span { font-size: 14px; }
+.app-sidebar .nav-link {
+  color: #b9c4d8; padding: 11px 18px; display: flex; align-items: center; gap: 10px;
+  border-left: 3px solid transparent; font-size: 14.5px;
+}
+.app-sidebar .nav-link:hover { background: var(--ev-navy-soft); color: #fff; }
+.app-sidebar .nav-link.active { background: var(--ev-navy-soft); color: #fff; border-left-color: var(--ev-blue); }
+.app-sidebar .nav-section {
+  padding: 16px 18px 6px; font-size: 11.5px; letter-spacing: .04em; color: #6f7e98;
+}
+
+.app-main { margin-left: var(--sidebar-width); min-height: 100vh; }
+.app-topbar {
+  background: #fff; border-bottom: 1px solid var(--ev-border);
+  padding: 12px 22px; display: flex; align-items: center; gap: 14px;
+  position: sticky; top: 0; z-index: 1030;
+}
+.app-content { padding: 22px; }
+
+@media (max-width: 991px) {
+  .app-sidebar { transform: translateX(-100%); }
+  .app-sidebar.open { transform: translateX(0); }
+  .app-main { margin-left: 0; }
+}
+
+/* ---------- Cards ---------- */
+.card { border: 1px solid var(--ev-border); border-radius: 10px; box-shadow: 0 1px 2px rgba(16,25,43,.04); }
+.card-header { background: #fff; border-bottom: 1px solid var(--ev-border); font-weight: 600; }
+
+.stat-card { display: flex; align-items: center; gap: 14px; padding: 16px; height: 100%; }
+.stat-card .stat-icon {
+  width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center;
+  font-size: 20px; flex: 0 0 auto;
+}
+.stat-card .stat-value { font-size: 26px; font-weight: 650; line-height: 1.1; }
+.stat-card .stat-label { color: var(--ev-grey); font-size: 13px; }
+
+.tint-blue { background: rgba(11,99,246,.12); color: var(--ev-blue); }
+.tint-green { background: rgba(23,166,115,.14); color: var(--ev-green); }
+.tint-amber { background: rgba(240,160,32,.16); color: #b87508; }
+.tint-red { background: rgba(224,68,62,.13); color: var(--ev-red); }
+.tint-grey { background: rgba(107,118,134,.14); color: var(--ev-grey); }
+
+/* ---------- Status badges ---------- */
+.badge-status { font-weight: 600; font-size: 12px; padding: .35em .7em; border-radius: 20px; }
+.st-available, .st-healthy, .st-operational, .st-resolved, .st-completed { background: rgba(23,166,115,.14); color: #0f7a54; }
+.st-charging, .st-active, .st-scheduled { background: rgba(11,99,246,.12); color: var(--ev-blue-dark); }
+.st-warning, .st-idle, .st-partial, .st-acknowledged, .st-degraded, .st-inprogress { background: rgba(240,160,32,.18); color: #99610a; }
+.st-fault, .st-critical, .st-failed, .st-overdue { background: rgba(224,68,62,.13); color: #b32a25; }
+.st-offline, .st-maintenance, .st-cancelled, .st-interrupted { background: rgba(107,118,134,.16); color: #4b5563; }
+
+.health-bar { height: 6px; border-radius: 4px; background: #e6eaf1; overflow: hidden; }
+.health-bar > span { display: block; height: 100%; border-radius: 4px; }
+
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.dot-green { background: var(--ev-green); }
+.dot-amber { background: var(--ev-amber); }
+.dot-red { background: var(--ev-red); }
+.dot-grey { background: var(--ev-grey); }
+
+/* ---------- Tables ---------- */
+.table { font-size: 14px; margin-bottom: 0; }
+.table > thead th { color: var(--ev-grey); font-weight: 600; font-size: 12.5px; border-bottom-width: 1px; }
+.table-hover tbody tr:hover { background: #f7f9fc; }
+
+/* ---------- Misc ---------- */
+.simulated-banner {
+  background: rgba(240,160,32,.14); border: 1px solid rgba(240,160,32,.4);
+  color: #8a5a06; border-radius: 8px; padding: 8px 14px; font-size: 13.5px;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.empty-state { text-align: center; color: var(--ev-grey); padding: 34px 16px; }
+.empty-state .icon { font-size: 30px; display: block; margin-bottom: 8px; }
+.toast-stack { position: fixed; right: 18px; bottom: 18px; z-index: 1080; display: grid; gap: 8px; }
+#map, .map-panel { height: 380px; border-radius: 10px; }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ev-green); display: inline-block; }
+.live-dot.stale { background: var(--ev-grey); }
+.skeleton { background: linear-gradient(90deg,#eef1f6,#f7f9fc,#eef1f6); border-radius: 6px; height: 14px; animation: pulse 1.2s infinite; }
+@keyframes pulse { 0%{opacity:.6} 50%{opacity:1} 100%{opacity:.6} }
+.btn-primary { background: var(--ev-blue); border-color: var(--ev-blue); }
+.btn-primary:hover { background: var(--ev-blue-dark); border-color: var(--ev-blue-dark); }
+.text-muted-sm { color: var(--ev-grey); font-size: 13px; }
+:focus-visible { outline: 2px solid var(--ev-blue); outline-offset: 2px; }
